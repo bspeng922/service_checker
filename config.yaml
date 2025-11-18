@@ -1,0 +1,96 @@
+# 服务检测框架配置
+check_interval: 30
+max_workers: 5
+log_level: "INFO"
+
+# Web界面配置
+web_host: "0.0.0.0"
+web_port: 5000
+
+# SSH服务器配置
+ssh_servers:
+  web-server:
+    name: "web-server"
+    host: "10.100.27.1"
+    port: 22
+    username: "root"
+    password: "123456"  # 建议使用key_file
+    key_file: ""
+    timeout: 10
+
+  db-server:
+    name: "db-server"
+    host: "10.100.27.1"
+    port: 22
+    username: "root"
+    password: "123456"
+    timeout: 10
+
+  docker-host:
+    name: "docker-host"
+    host: "10.4.2.3"
+    port: 22
+    username: "root"
+    password: "123456"
+    timeout: 10
+
+# 服务列表配置
+services:
+  # 本地服务检测
+  - name: "local-nginx"
+    type: "systemd"
+    config:
+      service_name: "nginx"
+      expected_status: "active"
+    # 不指定server表示本地检测
+
+  # SSH远程Systemd检测
+  - name: "remote-nginx"
+    type: "systemd"
+    server: "web-server"  # 引用ssh_servers中的配置
+    config:
+      service_name: "nginx"
+      expected_status: "active"
+
+  - name: "remote-mariadb"
+    type: "systemd"
+    server: "db-server"
+    config:
+      service_name: "mariadb"
+      expected_status: "active"
+
+  # SSH远程REST API检测（在远程服务器上curl本地服务）
+  - name: "web-api"
+    type: "restapi"
+    server: "web-server"
+    config:
+      url: "http://localhost:10009/v1/hypervisors"
+      method: "GET"
+      timeout: 5
+      expected_status: 200
+
+  # SSH远程Supervisor检测
+  - name: "cpcloud:web"
+    type: "supervisor"
+    server: "web-server"
+    config:
+      process_name: "cpcloud:web"
+      supervisor_url: "unix:///var/run/supervisor.sock"
+      expected_state: "RUNNING"
+
+  # SSH远程Docker检测
+  - name: "redis-cache"
+    type: "docker"
+    server: "docker-host"
+    config:
+      container_name: "redis"
+      expected_state: "running"
+
+  # 混合检测：本地和远程
+  - name: "app-health"
+    type: "restapi"
+    config:
+      url: "http://10.100.27.1:10009/v1/hypervisors"
+      method: "GET"
+      timeout: 10
+      expected_status: 200

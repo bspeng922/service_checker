@@ -1,0 +1,253 @@
+:root {
+    --healthy-color: #28a745;
+    --unhealthy-color: #dc3545;
+    --warning-color: #ffc107;
+    --unknown-color: #6c757d;
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    --card-hover-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-header {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+}
+
+.status-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+}
+
+.status-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.host-card {
+    border-left: 5px solid #007bff;
+    height: 100%;
+}
+
+.host-healthy {
+    border-left-color: var(--healthy-color);
+}
+
+.host-unhealthy {
+    border-left-color: var(--unhealthy-color);
+}
+
+.host-warning {
+    border-left-color: var(--warning-color);
+}
+
+.host-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.service-item {
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    border-left: 4px solid;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateX(5px);
+}
+
+.service-healthy {
+    border-left-color: var(--healthy-color);
+    background: linear-gradient(135deg, #f8fff8 0%, #e8f5e8 100%);
+}
+
+.service-unhealthy {
+    border-left-color: var(--unhealthy-color);
+    background: linear-gradient(135deg, #fff8f8 0%, #f5e8e8 100%);
+}
+
+.service-warning {
+    border-left-color: var(--warning-color);
+    background: linear-gradient(135deg, #fffdf8 0%, #f5f2e8 100%);
+}
+
+.status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.badge-healthy {
+    background-color: var(--healthy-color);
+    color: white;
+}
+
+.badge-unhealthy {
+    background-color: var(--unhealthy-color);
+    color: white;
+}
+
+.badge-warning {
+    background-color: var(--warning-color);
+    color: black;
+}
+
+.badge-unknown {
+    background-color: var(--unknown-color);
+    color: white;
+}
+
+.stats-card {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.stats-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.refresh-btn {
+    background: var(--primary-gradient);
+    border: none;
+    border-radius: 25px;
+    padding: 0.75rem 2rem;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.refresh-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.last-update {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.service-type-badge {
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 0.25rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.loading-spinner {
+    display: none;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.service-details {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 0.5rem;
+}
+
+.host-info {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.host-type-badge {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.host-stats {
+    background: rgba(0,0,0,0.03);
+    border-radius: 10px;
+    padding: 0.75rem;
+    margin-top: 1rem;
+}
+
+.host-card-body {
+    padding: 1.5rem;
+}
+
+.host-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #667eea;
+}
+
+.service-status-icon {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+.modal-service-item {
+    border-left: 4px solid;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    background: white;
+}
+
+.progress {
+    height: 8px;
+    margin-top: 0.5rem;
+}
+
+.health-score {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.host-connection-info {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.connection-detail {
+    display: flex;
+    justify-content: between;
+    margin-bottom: 0.25rem;
+}
+
+.connection-label {
+    font-weight: 500;
+    color: #6c757d;
+    min-width: 80px;
+}
+
+.connection-value {
+    color: #495057;
+}
