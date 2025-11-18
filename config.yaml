@@ -2,10 +2,14 @@
 check_interval: 30
 max_workers: 5
 log_level: "INFO"
+debug: false
 
 # Web界面配置
-web_host: "0.0.0.0"
+web_host: "127.0.0.1"
 web_port: 5000
+window_title: "服务监控系统"
+window_width: 1200
+window_height: 800
 
 # SSH服务器配置
 ssh_servers:
